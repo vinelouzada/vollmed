@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get("/medicos",[MedicosController::class,"buscarTodos"]);
+Route::get("/medicos/{medico}",[MedicosController::class,"buscarApenas"]);
 Route::post("/medicos",[MedicosController::class,"cadastrar"]);
+Route::put("/medicos/{medico}",[MedicosController::class,"atualizar"]);
+Route::delete("/medicos/{medico}",[MedicosController::class,'excluir']);

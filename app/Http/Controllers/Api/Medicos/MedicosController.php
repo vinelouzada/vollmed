@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 
 class MedicosController extends Controller
 {
-    public function buscar()
+    public function buscarTodos()
     {
-        return Medico::all();
+        return Medico::with("enderecos")->get();
+    }
+
+    public function buscarApenas(Request $request)
+    {
+        return Medico::findOrFail($request->medico);
     }
 
     public function cadastrar(Request $request)
@@ -39,5 +44,17 @@ class MedicosController extends Controller
                     "medico_id" => $medico->id
                 ]
         );
+    }
+
+    public function atualizar(Medico $medico, Request $request)
+    {
+
+       return $medico->update($request->all());
+    }
+
+    public function excluir(Medico $medico, Request $request)
+    {
+        $medico->deleteOrFail();
+        return response()->noContent();
     }
 }

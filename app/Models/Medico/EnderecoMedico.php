@@ -15,4 +15,5 @@ class EnderecoMedico extends Model
     {
         return $this->belongsTo(Medico::class);
     }
+
 }
